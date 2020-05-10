@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{order.id}}
+{{template_order.custom}}
+{{template_order.price}}
+{% for commodity in template_order.commodity.all %}
+    <li>{{commodity.name}}</li>
+{% endfor %}
+</body>
+</html>
+
+<form action="{% url 'order:add_item' order.id %}" method="post">
+{% csrf_token %}
+{% for commodity in commodity_list.all %}
+    <input type="radio" name="new_commodity" id="new_commodity{{ forloop.counter }}" value="{{ commodity.id }}">
+    <label for="commodity{{ forloop.counter }}">{{ commodity.name }}</label><br>
+{% endfor %}
+<input type="submit" value="Add">
+</form>

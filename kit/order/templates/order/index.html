@@ -1,0 +1,9 @@
+{% if template_order_list %}
+    <ul>
+    {% for order in template_order_list %}
+        <li><a href="/order/{{ order.id }}">{{ order.custom }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No order are available.</p>
+{% endif %}

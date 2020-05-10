@@ -1,0 +1,7 @@
+<h1>{{ order.custom }}</h1>
+<ul>
+{% for commodity in order.commodity.all %}
+    <li>{{ commodity.name }} -- {{ commodity.price }}  </li>
+{% endfor %}
+</ul>
+<a href="{% url 'order:detail' order.id %}">Update again?</a>

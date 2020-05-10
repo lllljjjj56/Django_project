@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{order.id}}
+{{order.custom}}
+{{order.price}}
+{% for commodity in order.commodity.all %}
+    <li>{{commodity.name}}</li>
+{% endfor %}
+
+
+<form action="{% url 'order:add_item' order.id %}" method="post">
+{% csrf_token %}
+{% for commodity in commodity_list.all %}
+    <input type="radio" name="new_commodity" id="new_commodity{{ forloop.counter }}" value="{{ commodity.id }}">
+    <label for="commodity{{ forloop.counter }}">{{ commodity.name }}</label><br>
+{% endfor %}
+<input type="submit" value="Add">
+</form>
+<form action="{% url 'order:remove_item' order.id %}" method="post">
+{% csrf_token %}
+{% for order in order.commodity.all %}
+    <input type="radio" name="new_commodity" id="new_commodity{{ forloop.counter }}" value="{{ order.id }}">
+    <label for="commodity{{ forloop.counter }}">{{ order.name }}</label><br>
+{% endfor %}
+<input type="submit" value="Delete">
+</form>
+</body>
+</html>
